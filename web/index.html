@@ -1,0 +1,177 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Consensus Sentiment Analysis</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <style type="text/css" media="all">@import url("http://consensus-project.eu/modules/system/system.base.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/system/system.menus.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/system/system.messages.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/system/system.theme.css?nby1x7");</style>
+    <style type="text/css" media="all">@import url("http://consensus-project.eu/modules/comment/comment.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/modules/date/date_api/date.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/field/theme/field.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/node/node.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/search/search.css?nby1x7");
+    @import url("http://consensus-project.eu/modules/user/user.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/modules/views/css/views.css?nby1x7");</style>
+    <style type="text/css" media="all">@import url("http://consensus-project.eu/sites/all/modules/ctools/css/ctools.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/modules/views_ticker/views.ticker.scroller.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/modules/webform/css/webform.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/libraries/superfish/css/superfish.css?nby1x7");</style>
+    <style type="text/css" media="all and (min-width: 980px)">@import url("http://consensus-project.eu/sites/all/themes/consensus/css/960.css?nby1x7");</style>
+    <style type="text/css" media="all and (min-width: 760px) and (max-width: 980px)">@import url("http://consensus-project.eu/sites/all/themes/consensus/css/720.css?nby1x7");</style>
+    <style type="text/css" media="all and (max-width: 759px)">@import url("http://consensus-project.eu/sites/all/themes/consensus/css/mobile.css?nby1x7");</style>
+    <style type="text/css" media="all">@import url("http://consensus-project.eu/sites/all/themes/consensus/css/column-layouts.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/js/flexslider/flexslider.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/style.css?nby1x7");</style>
+    <style type="text/css" media="all">@import url("http://consensus-project.eu/sites/all/themes/consensus/style-orange.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/fonts/sourcesanspro-font.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/fonts/titilliumweb-font.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/fonts/exo-font.css?nby1x7");
+    @import url("http://consensus-project.eu/sites/all/themes/consensus/fonts/ptserif-font.css?nby1x7");</style>
+
+    <!--[if (IE 9)&(!IEMobile)]>
+    <link type="text/css" rel="stylesheet" href="http://consensus-project.eu/sites/all/themes/consensus/ie9.css?nby1x7" media="all" />
+    <![endif]-->
+
+    <!--[if (lt IE 9)&(!IEMobile)]>
+    <link type="text/css" rel="stylesheet" href="http://consensus-project.eu/sites/all/themes/consensus/css/layout-ie.css?nby1x7" media="all" />
+    <![endif]-->
+
+    <!--[if (lt IE 9)&(!IEMobile)]>
+    <link type="text/css" rel="stylesheet" href="http://consensus-project.eu/sites/all/themes/consensus/ie.css?nby1x7" media="all" />
+    <![endif]-->
+    <style type="text/css" media="all">@import url("http://consensus-project.eu/sites/all/themes/consensus/local.css?nby1x7");</style>
+    </head>
+    <body style="font-size:16px;">
+    <style>
+        .tweetelement {
+            padding: 6px;
+        }
+        tr.tweetelement td {
+            border: 1px solid;
+          }
+    </style>
+    <center>
+        <div style="position: relative;z-index: 1;">
+        <img alt="Home" src="http://consensus-project.eu/sites/default/files/consensus_logo_final_0.png">
+        <h1>Test up to 140 characters of textual data.</h1>
+        <input type="text" name="thetext" id="thetext" style="width: 504px; height: 28px;" />
+        <input type="button" name="thetextbutton" id="thetextbutton" value="Analyze"/><br/>
+        <div><img src="http://i.imgur.com/XyZT9Wx.gif" style="display:none;" id="stextimage" /><span id="stextcontainer" style="display:none;">Sentiment Weight: <span id="stextvalue"></span></span></div><br/><br/>
+        <h1>Test a tweet by providing its ID.</h1>
+        <input type="text" name="thetweet" id="thetweet" />
+        <input type="button" name="thetweetbutton" id="thetweetbutton" value="Find & Analyze"/><br/>
+        <div><img src="http://i.imgur.com/XyZT9Wx.gif" style="display:none;" id="stweetimage" /><span id="stweetcontainer"></span></div><br/><br/>
+        <h1>Test a set of tweets by providing a keyword.</h1>
+        <input type="text" name="thekeyword" id="thekeyword" />
+        <input type="button" name="thekeybutton" id="thekeybutton" value="Search & Analyze"/><br/>
+        <div><img src="http://i.imgur.com/XyZT9Wx.gif" style="display:none;" id="skeyimage" /><span id="skeycontainer" style="display:inline-block;max-width:900px;"></span></div><br/><br/>
+    </div>    
+    </center>
+        <div style="position:absolute;bottom:10px;width:100%;text-align: center;z-index: 0;">
+            <div style="font-size: 15px;">Legend</div>
+            <table style="width: 500px; display: block; margin: 0px auto;">
+                <tr>
+                    <td style="border: none;">[-1,-0.5]</td>
+                    <td style="border: none;">(-0.5,-0.1]</td>
+                    <td style="border: none;">(-0.1,0.1)</td>
+                    <td style="border: none;">[0.1,0.5)</td>
+                    <td style="border: none;">[0.5,1]</td>
+                </tr>
+                <tr>
+                    <td style="border: none;">Very Negative</td>
+                    <td style="border: none;">Negative</td>
+                    <td style="border: none;">Neutral</td>
+                    <td style="border: none;">Positive</td>
+                    <td style="border: none;">Very Positive</td>
+                </tr>
+            </table>
+        </div>
+    
+        <script>
+              var entityMap = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': '&quot;',
+                "'": '&#39;',
+                "/": '&#x2F;'
+              };
+
+              function escapeHtml(string) {
+                return String(string).replace(/[&<>"'\/]/g, function (s) {
+                  return entityMap[s];
+                });
+              }
+            jQuery(document).ready(function(){
+            jQuery("#thetextbutton").click(function(){
+                jQuery("#stextimage").show();
+                jQuery("#stextcontainer").hide();
+                jQuery("#thetextbutton").attr("disabled", "disabled");
+                jQuery.get( "/ConsensusSentiTest/webresources/analyzetext",escapeHtml("text="+jQuery("#thetext").val()
+                )).done(function( data ) {
+                    jQuery( "#stextvalue" ).html( data );
+                }).fail(function(){
+                    jQuery( "#stextvalue" ).html( "Error" );
+                }).always(function( data ) {
+                    jQuery("#stextimage").hide();
+                    jQuery("#stextcontainer").show();
+                    jQuery("#thetextbutton").removeAttr("disabled");    
+                });
+            });
+            jQuery("#thetweetbutton").click(function(){
+                jQuery("#stweetimage").show();
+                jQuery("#stweetcontainer").hide();
+                jQuery("#thetweetbutton").attr("disabled", "disabled");
+                jQuery.get( "/ConsensusSentiTest/webresources/analyzeid",escapeHtml("id="+jQuery("#thetweet").val()
+                )).done(function( data ) {
+                    jQuery( "#stweetcontainer" ).html( data );
+                }).fail(function(){
+                    jQuery( "#stweetcontainer" ).html( "Error" );
+                }).always(function( data ) {
+                    jQuery("#stweetimage").hide();
+                    jQuery("#stweetcontainer").show();
+                    jQuery("#thetweetbutton").removeAttr("disabled");    
+                });
+            });
+            jQuery("#thekeybutton").click(function(){
+                jQuery("#skeyimage").show();
+                jQuery("#skeycontainer").hide();
+                jQuery("#thekeybutton").attr("disabled", "disabled");
+                jQuery.get( "/ConsensusSentiTest/webresources/analyzekeyword",escapeHtml("keyword="+jQuery("#thekeyword").val()
+                )).done(function( data ) {
+                    jQuery( "#skeycontainer" ).html( data );
+                }).fail(function(){
+                    jQuery( "#skeycontainer" ).html( "Error" );
+                }).always(function( data ) {
+                    jQuery("#skeyimage").hide();
+                    jQuery("#skeycontainer").show();
+                    jQuery("#thekeybutton").removeAttr("disabled");    
+                });
+            });
+            jQuery("#thetext").keyup(function(){
+                 if(jQuery("#thetext").val().length>142){
+                     jQuery("#thetext").val(jQuery("#thetext").val().substring(0, 140));
+                 }
+            });
+            jQuery("#thetext").keydown(function(){
+                 if(jQuery("#thetext").val().length>142){
+                     jQuery("#thetext").val(jQuery("#thetext").val().substring(0, 140));
+                 }
+            });
+            jQuery('#thetweet').keyup(function () {
+                if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+                   this.value = this.value.replace(/[^0-9\.]/g, '');
+                }
+            });
+           })
+        </script>
+    </body>
+</html>
